@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru" class="home-boot-first-run">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#070A0F" />
+  <base href="https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai; base-uri 'self' https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai; object-src 'none'; script-src 'self' 'unsafe-inline' https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai https://cdn.jsdelivr.net https://telegram.org; style-src 'self' 'unsafe-inline' https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://web-production-3cb7a.up.railway.app https://*.up.railway.app https://cdn.jsdelivr.net https://sistema-molodtsov.storage.yandexcloud.net https://*.storage.yandexcloud.net; media-src 'self' blob: data: https://web-production-3cb7a.up.railway.app https://*.up.railway.app https://sistema-molodtsov.storage.yandexcloud.net https://*.storage.yandexcloud.net; manifest-src 'self' https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Система — Руслан Молодцов</title>
+  <meta name="description" content="Авторский канал Руслана Молодцова. Курсы, телесная терапия и практики." />
+  <link rel="icon" type="image/png" href="https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/assets/webp/logo2.webp" />
+  <link rel="stylesheet" href="https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/css/style.css?v=113" />
+  <link rel="stylesheet" href="https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/css/nav.css?v=73" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="manifest" href="https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/manifest.json" />
+  <script>
+    (function() {
+      try {
+        var schemaKey = 'sistema:onboarding-schema';
+        var schema = 'device-v1';
+        if (localStorage.getItem(schemaKey) !== schema) {
+          localStorage.removeItem('sistema:onboarding-complete');
+          localStorage.removeItem('sistema:onboarding-profile');
+          localStorage.removeItem('sistema:intro-splash-seen');
+        }
+        var completed = localStorage.getItem('sistema:onboarding-complete') === 'true';
+        document.documentElement.classList.remove('home-boot-today', 'home-boot-first-run');
+        if (completed) document.documentElement.classList.add('home-boot-today');
+        else document.documentElement.classList.add('home-boot-first-run');
+      } catch (e) {
+        document.documentElement.classList.remove('home-boot-today');
+        document.documentElement.classList.add('home-boot-first-run');
+      }
+    })();
+  </script>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script>
+    (function initTelegramBridge() {
+      var tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
+      var API_BASE = 'https://web-production-3cb7a.up.railway.app/api';
+      var SOURCE = 'telegram_webapp';
+      window.SISTEMA_CLIENT_SOURCE = SOURCE;
+      window.API_BASE = API_BASE;
+      function setDeviceId() {
+        try {
+          var key = 'sistema:device-id';
+          if (!localStorage.getItem(key)) {
+            var id = window.crypto && crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + '-' + Math.random().toString(16).slice(2);
+            localStorage.setItem(key, 'tg:' + id);
+          }
+        } catch (e) {}
+      }
+      function saveTokens(tokens) {
+        if (!tokens) return;
+        if (tokens.access) localStorage.setItem('accessToken', tokens.access);
+        if (tokens.refresh) localStorage.setItem('refreshToken', tokens.refresh);
+      }
+      function dispatchAuth(user) {
+        try {
+          window.dispatchEvent(new CustomEvent('auth:change', { detail: { user: user, source: SOURCE } }));
+        } catch (e) {}
+      }
+      async function loginWithTelegram() {
+        if (!tg || !tg.initData) return;
+        try {
+          var response = await fetch(API_BASE + '/telegram/auth', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-Sistema-Client': SOURCE },
+            credentials: 'include',
+            cache: 'no-store',
+            body: JSON.stringify({ initData: tg.initData, source: SOURCE }),
+          });
+          if (!response.ok) return;
+          var session = await response.json();
+          saveTokens(session.tokens);
+          dispatchAuth(session.user || null);
+        } catch (e) {}
+      }
+      setDeviceId();
+      if (tg) {
+        try {
+          tg.ready();
+          tg.expand();
+          tg.setHeaderColor('#070A0F');
+          tg.setBackgroundColor('#070A0F');
+        } catch (e) {}
+      }
+      loginWithTelegram();
+    })();
+  </script>
+</head>
+<body class="dark-theme">
+  <div class="system-splash" id="system-splash" aria-hidden="true">
+    <img src="https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/assets/webp/logo2-Photoroom.webp" alt="Система" class="system-splash-logo" loading="eager" decoding="async">
+  </div>
+
+  <!-- Навигация (Desktop & Mobile Top) -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="brand brand-outlined">
+        <img src="https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/assets/webp/logo2.webp" alt="Система Молодцова" loading="lazy" decoding="async" class="brand-logo-img" />
+      </a>
+      
+      <div class="nav-links desktop-only">
+        <a href="/feed/" class="nav-link">Лента</a>
+        <a href="/community/" class="nav-link">Сообщество</a>
+        <a href="/ai/" class="nav-link">AI</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="https://t.me/obrazmisl" target="_blank" rel="noopener noreferrer" class="btn-nav-outline desktop-only">
+          Вступить в клуб
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+        <button id="nav-auth-btn" class="btn-nav-outline" data-auth-open="login">Войти</button>
+        <a id="nav-account-link" href="/account/" class="btn-nav-outline u-hidden">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    
+    <section class="system-intro-screen" id="system-intro" aria-label="Вход в систему">
+      <div class="auth-gateway-shell" data-auth-gateway>
+        <div class="auth-gateway-panel" data-auth-welcome>
+          <div class="auth-gateway-copy">
+            <img src="https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/assets/webp/logo2-Photoroom.webp" alt="Система" class="auth-gateway-logo" loading="eager" decoding="async">
+            <h1>Найдем, с чего начать сегодня</h1>
+            <p>Короткая настройка. На выходе — две подходящие программы для старта.</p>
+          </div>
+          <div class="auth-gateway-actions">
+            <button class="ios-auth-button ios-auth-button-secondary" type="button" data-onboarding-start>Подобрать первый шаг</button>
+          </div>
+        </div>
+
+        <div class="auth-gateway-panel auth-provider-panel hidden" data-auth-providers>
+          <button class="glass-back-icon" type="button" data-auth-choice-back aria-label="Назад">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="auth-gateway-copy">
+            <span class="auth-gateway-pill">Вход</span>
+            <h2>Сохранить путь и прогресс</h2>
+            <p>Выберите удобный способ входа. После авторизации Система сохранит маршрут и рекомендации.</p>
+          </div>
+          <div class="auth-gateway-actions">
+            <button class="ios-auth-button ios-auth-button-primary" type="button" id="gateway-telegram-btn" data-telegram-login>
+              <span>Войти через Telegram</span>
+            </button>
+            <button class="ios-auth-button ios-auth-button-secondary" type="button" id="gateway-yandex-btn" data-yandex-login>
+              <span>Войти через Яндекс</span>
+            </button>
+            <p class="auth-error" id="gateway-auth-error"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="onboarding-flow hidden" id="onboarding-flow" aria-label="Настройка пути">
+      <div class="onboarding-card">
+        <div class="onboarding-topbar">
+          <button class="glass-back-icon onboarding-back-link" type="button" data-onboarding-back aria-label="Назад">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+        </div>
+        <div class="onboarding-sheet">
+          <div class="onboarding-progress-dots onboarding-progress-bars" data-onboarding-dots></div>
+          <p class="hub-kicker" data-onboarding-step-label>Шаг 1 из 3</p>
+          <h2 data-onboarding-title>Что сейчас важнее?</h2>
+          <p data-onboarding-desc>Выберите ближайший запрос. Это не диагноз, а точка входа в библиотеку.</p>
+          <p class="onboarding-select-hint" data-onboarding-hint>Выберите один вариант</p>
+          <div class="onboarding-options" data-onboarding-options></div>
+          <div class="onboarding-result-card hidden" data-onboarding-result>
+            <span data-result-kicker>Сегодня</span>
+            <strong data-result-title>Мягкий вход</strong>
+            <p data-result-desc>Система соберет первый шаг после ответов.</p>
+          </div>
+          <div class="onboarding-actions">
+            <button class="ios-auth-button ios-auth-button-primary" type="button" data-onboarding-next>Далее</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="today-screen hidden" id="today-screen" aria-label="Сегодня">
+      <div class="today-hero-card" data-today-hero style="--ux-bg:url('https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/assets/webp/new_main.webp')">
+        <div class="today-hero-copy">
+          <p class="hub-kicker" data-today-kicker>Сегодня</p>
+          <h1 data-today-title>Ваше направление</h1>
+          <p data-today-subtitle>Две подходящие программы без поиска по всей библиотеке.</p>
+        </div>
+        <div class="today-carousel-controls" aria-label="Переключить направление">
+          <button type="button" data-today-prev aria-label="Предыдущее направление">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" data-today-next aria-label="Следующее направление">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <div class="today-hero-dots" data-today-dots aria-hidden="true"><span class="active"></span><span></span><span></span></div>
+      </div>
+
+      <div class="today-section-title">
+        <div>
+          <p class="hub-kicker">Подходит под запрос</p>
+        </div>
+      </div>
+
+      <div class="today-grid">
+        <article class="today-main-card" data-today-main style="--ux-bg:url('https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/assets/webp/ai_back.webp')">
+          <div>
+            <span class="today-day-pill">Основа</span>
+            <h2 data-today-step-title>Первая программа</h2>
+            <p data-today-step-desc>Откройте программу, а затем при необходимости разберите материал с AI.</p>
+          </div>
+          <a class="today-program-button" href="/programs/" data-today-primary aria-label="Открыть программу">
+            <span data-today-primary-action>Начать</span>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.75v12.5c0 .78.86 1.26 1.53.86l10.1-6.25a1 1 0 0 0 0-1.72L9.53 4.89A1 1 0 0 0 8 5.75Z"/></svg>
+          </a>
+        </article>
+
+        <article class="today-main-card" data-today-secondary style="--ux-bg:url('https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/assets/webp/courses.webp')">
+          <div>
+            <span class="today-day-pill">Дополнительная программа</span>
+            <h2 data-today-secondary-title>Вторая программа</h2>
+            <p data-today-secondary-desc>Второй подходящий вход по выбранному направлению.</p>
+          </div>
+          <a class="today-program-button" href="/programs/" data-today-secondary-link aria-label="Открыть вторую программу">
+            <span data-today-secondary-action>Начать</span>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.75v12.5c0 .78.86 1.26 1.53.86l10.1-6.25a1 1 0 0 0 0-1.72L9.53 4.89A1 1 0 0 0 8 5.75Z"/></svg>
+          </a>
+        </article>
+
+        <a href="/meditations/?play=space" class="today-support-card today-meditation-card" style="--ux-bg:url('https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/assets/webp/mmeditation.webp')">
+          <div>
+            <h3>Медитация дня</h3>
+            <p>Взгляд из космоса: мягкая аудиопрактика с видеофоном для спокойного переключения.</p>
+          </div>
+          <span class="today-support-button">Слушать</span>
+        </a>
+
+        <a href="/ai/" class="today-support-card" style="--ux-bg:url('https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/assets/webp/ai_back.webp')">
+          <div>
+            <h3>Нужна помощь?</h3>
+            <p>Задайте AI любой вопрос: про состояние, материалы, практики или навигацию внутри системы.</p>
+          </div>
+          <span class="today-support-button">Спросить</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- iOS Glass Tab Bar (Mobile Only) -->
+<script src="https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/js/config.js"></script>
+  <script src="https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/js/api.js?v=59"></script>
+  <script src="https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/js/auth.js?v=18"></script>
+  <script src="https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/js/nav.js?v=80"></script>
+  <script src="https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/js/main.js?v=2"></script>
+  <script src="https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/js/program-catalog.js?v=8"></script>
+  <script src="https://xn----7sbbhjdu1agcwbb5abq1f.xn--p1ai/js/home-page.js?v=15"></script>
+</body>
+</html>
